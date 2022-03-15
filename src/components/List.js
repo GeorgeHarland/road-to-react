@@ -3,7 +3,7 @@ import Item from "./Item";
 const List = ({ list }) => (
     <ul>
         {list.map((item) => (
-        <Item item={item} />
+            <Item key={item.objectID} {...item}/>
         ))}
     </ul>
 )
