@@ -23,7 +23,12 @@ const App = () => {
     }
   ]
 
-  const [searchTerm, setSearchTerm] = React.useState('');
+  // Stores the last search in the browser (+ 2nd part of handleSearch)
+  const [searchTerm, setSearchTerm] = React.useState(localStorage.getItem('search') ?? 'Search stories');
+
+  React.useEffect(() => {
+    localStorage.setItem('search', searchTerm)
+  }, [searchTerm])
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value)
