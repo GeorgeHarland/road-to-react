@@ -2,6 +2,18 @@ import React from 'react';
 import Search from './components/Search';
 import List from './components/List';
 
+const useSemiPersistentState = (key, initialState) => {
+  const [value, setValue] = React.useState(
+    localStorage.getItem(key) || initialState
+  );
+
+  React.useEffect(() => {
+    localStorage.setItem(key, value)
+  }, [value, key])
+
+  return [value, setValue]
+}
+
 const App = () => {
 
   const stories = [
@@ -24,11 +36,7 @@ const App = () => {
   ]
 
   // Stores the last search in the browser (+ 2nd part of handleSearch)
-  const [searchTerm, setSearchTerm] = React.useState(localStorage.getItem('search') ?? 'Search stories');
-
-  React.useEffect(() => {
-    localStorage.setItem('search', searchTerm)
-  }, [searchTerm])
+  const [searchTerm, setSearchTerm] = useSemiPersistentState('search','React')
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value)
