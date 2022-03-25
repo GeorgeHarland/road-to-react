@@ -1,5 +1,5 @@
 import React from 'react';
-import Search from './components/Search';
+import InputWithLabel from './components/InputWithLabel';
 import List from './components/List';
 
 const useSemiPersistentState = (key, initialState) => {
@@ -50,7 +50,15 @@ const App = () => {
     <div>
       <h1>Search lists.</h1>
 
-      <Search currentSearch={searchTerm} onSearch={handleSearch}/>
+      <InputWithLabel
+       id="search"
+       label="Search"
+       value={searchTerm} 
+       onInputChange={handleSearch}
+      />
+      <p>
+        Searching for <strong>{searchTerm}</strong>.
+      </p>
 
       <hr/>
 
